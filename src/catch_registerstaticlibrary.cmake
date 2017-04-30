@@ -59,6 +59,15 @@ endfunction()
 function (catch_maketesttarget libraryName testTargetName)
   add_executable(${testTargetName} ${catch_registerstaticlibrary_location}/catch_main.cpp)
   target_link_libraries(${testTargetName} ${libraryName})
+
+  # place the test target in the same msvc solution folder
+  get_target_property(msvc_folder_testtarget ${testTargetName} FOLDER)
+  if (${msvc_folder_testtarget} MATCHES ".*NOTFOUND")
+    get_target_property(msvc_folder ${libraryName} FOLDER)
+    if (NOT ${msvc_folder} MATCHES ".*NOTFOUND")
+      set_target_properties(${testTargetName} PROPERTIES FOLDER ${msvc_folder})
+    endif()
+  endif()
 endfunction()
 
 function (catch_register_ctest testTargetName)
