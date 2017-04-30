@@ -9,13 +9,17 @@ endif()
 
 set (catch_registerstaticlibrary_location ${CMAKE_CURRENT_LIST_DIR})
 
-function (catch_registercppfiles libraryName)
+if (MSVC)
+  set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+endif()
+
+function (registercppfiles libraryName)
   get_target_property(sources ${libraryName} SOURCES)
-  # catch_registercppfiles is a dependency of the library, so that
+  # registercppfiles is a dependency of the library, so that
   # it will be called during the build
-  add_custom_target(catch_registercppfiles_${libraryName} COMMAND python ${catch_registerstaticlibrary_location}/catch_registerstaticlibrary.py -registercppfiles ${sources} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-  add_dependencies(${libraryName} catch_registercppfiles_${libraryName})
-  set_target_properties(catch_registercppfiles_${libraryName} PROPERTIES FOLDER _catch)
+  add_custom_target(registercppfiles_${libraryName} COMMAND python ${catch_registerstaticlibrary_location}/catch_registerstaticlibrary.py -registercppfiles ${sources} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  add_dependencies(${libraryName} registercppfiles_${libraryName})
+  set_target_properties(registercppfiles_${libraryName} PROPERTIES FOLDER catch_autoregister)
 endfunction()
 
 function (catch_create_registermainfile libraryName)
@@ -27,12 +31,12 @@ function (catch_create_registermainfile libraryName)
   execute_process(COMMAND python ${catch_registerstaticlibrary_location}/catch_registerstaticlibrary.py -registermainfile ${sources} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
   # Also execute this step during the build
-  add_custom_target(catch_create_registermainfile${libraryName} COMMAND python ${catch_registerstaticlibrary_location}/catch_registerstaticlibrary.py -registermainfile ${sources} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-  add_dependencies(${libraryName} catch_create_registermainfile${libraryName})
-  set_target_properties(catch_create_registermainfile${libraryName} PROPERTIES FOLDER _catch)
+  add_custom_target(registermainfile_${libraryName} COMMAND python ${catch_registerstaticlibrary_location}/catch_registerstaticlibrary.py -registermainfile ${sources} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  add_dependencies(${libraryName} registermainfile_${libraryName})
+  set_target_properties(registermainfile_${libraryName} PROPERTIES FOLDER catch_autoregister)
 
-  if(TARGET catch_registercppfiles_${libraryName})
-    add_dependencies(catch_create_registermainfile${libraryName} catch_registercppfiles_${libraryName})
+  if(TARGET registercppfiles_${libraryName})
+    add_dependencies(registermainfile_${libraryName} registercppfiles_${libraryName})
   endif()
 endfunction()
 
@@ -65,7 +69,7 @@ endfunction()
 function (catch_registerstaticlibrary libraryName testTargetName)
   # message("catch_register_static_library " ${libraryName})
   catch_addincludepath(${libraryName})
-  catch_registercppfiles(${libraryName})
+  registercppfiles(${libraryName})
   catch_create_registermainfile(${libraryName})
   catch_appendregisterlibrarycpp_tosources(${libraryName})
 
