@@ -1,7 +1,7 @@
 # Static library testing made easy with catch and cmake
 
 #### Motivation
-This is an adaption of [doctest_registerlibrary] (https://github.com/pthom/doctest_registerlibrary) for catch.
+This is an adaption of [doctest_registerlibrary](https://github.com/pthom/doctest_registerlibrary) for [catch](https://github.com/philsquared/Catch)
 
 The [doctest](https://github.com/onqtam/doctest) documentation says rightfully:
 > Tests can be considered a form of documentation and should be able to reside near the production code which they test.
