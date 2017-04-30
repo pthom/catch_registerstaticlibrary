@@ -32,21 +32,25 @@ allowedExtensions = ["cpp", "cc", "cxx"]
 
 # words that indicate that a file actually uses catch
 catch_usage_hints = ["catch.hpp", "TEST_CASE", "SCENARIO"]
-catch_usage_hints_re = map(findWholeWord_Regex, catch_usage_hints)
 
 
 def DoesSourceFileUsecatch(lines):
     doesFileUsecatch = False
     for line in lines:
-        for exp in catch_usage_hints_re:
-            if exp(line):
+        line=line[:-1]
+        # print("testing line ==>" + line + "<==")
+        for catch_usage_hint in catch_usage_hints:
+            my_regex = findWholeWord_Regex(catch_usage_hint)
+            if (my_regex(line)):
                 doesFileUsecatch = True
+                # print("Match with " + catch_usage_hint)
         if (doesFileUsecatch):
             break
+    print("doesFileUsecatch=" + str(doesFileUsecatch))
     return doesFileUsecatch
 
 def ProcessFile(filename):
-    #print("ProcessFile " + filename)
+    # print("ProcessFile " + filename)
     if (filename == "catch_registerstaticlibrary.cpp"):
         return
 
