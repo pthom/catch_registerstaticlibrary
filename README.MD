@@ -61,17 +61,13 @@ YourProject/
         └── catch_registerstaticlibrary.py
 ```
 
-#### Step 2 : Adjust the paths in `catch_registerstaticlibrary.cmake`
+#### Step 2 : Set catch_lib_location in you main CMakeLists.txt file
 
-If needed, adjust the paths in the first lines of `catch_registerstaticlibrary.cmake`
-
+Inside your main `CMakeLists.txt`, set the path to your copy of catch.hpp.
+For example:
 ```
-# Adjust this path if needed : this is where your catch.hpp file resides 
 set (catch_lib_location ${CMAKE_SOURCE_DIR}/catch)
-# Adjust this path if needed : this is where a checkout of catch_registerstaticlibrary resides
-set (catch_registerstaticlibrary_location ${CMAKE_SOURCE_DIR}/catch_registerstaticlibrary)
 ```
-
 
 #### Step 3 : enable tests for your project
 Enable tests in cmake, by adding the following line to your project's main `CMakeLists.txt` file:
