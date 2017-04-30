@@ -1,4 +1,4 @@
-# example_fail
+# `example_fail`
 This is an example of the classic case where static registration fails when your tests are placed inside a static library.
 See https://github.com/philsquared/Catch/issues/421
 

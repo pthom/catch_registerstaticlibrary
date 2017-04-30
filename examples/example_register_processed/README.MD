@@ -1,15 +1,7 @@
-# example_register
+# `example_register_processed`
 
-This is an example that uses catch_registerstaticlibrary.
-The usage is extremely simple: refer to MyLibrary/CMakeLists.txt.
+This is the same project as `example_register`, except that it shows the automatically generated registration code.
 
+See the commit https://github.com/pthom/catch_registerstaticlibrary/commit/974cb65ba8a3c81d48089e9cf27276dc6f4ae41a
+which shows the complete diff upon the first build (the modification are applied only once).
 
-This file is reproduced below:
-```
-include("${CMAKE_SOURCE_DIR}/catch_registerstaticlibrary/src/catch_registerstaticlibrary.cmake")
-
-set(sources lib1.cpp lib2.cpp)
-add_library(MyLibrary STATIC lib1.cpp lib2.cpp)
-set_property(TARGET MyLibrary PROPERTY CXX_STANDARD 11)
-catch_registerstaticlibrary(MyLibrary MyLibraryTest)
-```

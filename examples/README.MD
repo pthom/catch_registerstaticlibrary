@@ -1,4 +1,4 @@
-### example_fail
+### `example_fail`
 This is an example of the classic case where static registration fails when your tests are placed inside a static library.
 See https://github.com/philsquared/Catch/issues/421
 
@@ -11,7 +11,7 @@ No tests ran
 
 Ouch...
 
-### example_register
+### `example_register`
 `example_register/` is an example of a complete project with a library that will be tested.
 
 Build it by calling `build.sh` or `build.bat`
@@ -22,7 +22,7 @@ You can run the tests from the build folder with either one of the commands belo
 3. `./bin/MyLibraryTest`
 
 
-### example_register_processed
+### `example_register_processed`
 `example_register_processed/` is a copy of `example_register/`, in which the cpp source code was modified after cmake was executed.
 
 You can see the auto-generated functions `catchRegister_[GUID]()` as well as the auto-generated `catch_registerstaticlibrary.cpp` file.

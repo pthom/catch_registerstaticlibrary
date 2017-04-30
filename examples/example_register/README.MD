@@ -1,4 +1,4 @@
-# example_register
+# `example_register`
 
 This is an example that uses catch_registerstaticlibrary.
 The usage is extremely simple: refer to MyLibrary/CMakeLists.txt.
