@@ -3,12 +3,13 @@ This is an example of the classic case where static registration fails when your
 See https://github.com/philsquared/Catch/issues/421
 
 Build it and run the tests using `build.sh`
-`
-If you run the tests, you will see the following output (OUCH...)
+
+If you run the tests, you will see the following output :
 ```
-==============================================================================
 No tests ran
 ```
+
+Ouch...
 
 ### example_register
 `example_register/` is an example of a complete project with a library that will be tested.
