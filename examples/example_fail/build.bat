@@ -1,5 +1,4 @@
-
-deltree /Y build
+rd /S /Q build
 mkdir build
 cd build
 cmake ..
