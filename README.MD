@@ -17,6 +17,12 @@ For a more thorough explanation, see :
 This project provides a solution, based on the further assumption that :
 > Adding tests to a library should be straightforward. Ideally, it should be possible to do it by using a one-line instruction in the library's CMakeList file.
 
+#### Platforms
+This project was tested under OSX, Windows and Linux
+
+#### Requirements
+* cmake
+* python
 
 ## Quick usage instructions
 
