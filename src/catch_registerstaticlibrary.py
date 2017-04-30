@@ -21,7 +21,7 @@ catchRegisterCppCode = """
 
 [DeclareRegisterFunctions]
 
-int catchRegister()
+int CatchRegisterStaticLibrary()
 {
   int dummy_sum = 0;
 [CallRegisterFunctions]
