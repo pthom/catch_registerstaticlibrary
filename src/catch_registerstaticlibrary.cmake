@@ -1,4 +1,6 @@
+# Adjust this path if needed : this is where your catch.hpp file resides 
 set (catch_lib_location ${CMAKE_SOURCE_DIR}/catch)
+# Adjust this path if needed : this is where a checkout of catch_registerstaticlibrary resides
 set (catch_registerstaticlibrary_location ${CMAKE_SOURCE_DIR}/catch_registerstaticlibrary)
 
 function (catch_registercppfiles libraryName)

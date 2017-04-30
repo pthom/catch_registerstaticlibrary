@@ -4,7 +4,7 @@
 This is an adaption of [doctest_registerlibrary] (https://github.com/pthom/doctest_registerlibrary) for catch.
 
 The [doctest](https://github.com/onqtam/doctest) documentation says rightfully:
-> Tests can be considered a form of documentation and should be able to reside near the production code which they test.*
+> Tests can be considered a form of documentation and should be able to reside near the production code which they test.
 
 In the case of a static library, this means that the tests code should reside directly inside the library source files, and *not* inside separate source files.
 
@@ -31,10 +31,10 @@ catch_registerstaticlibrary(MyLibrary MyLibraryTest)
 ```
 
 This one-liner will :
-- ensure that all tests are actually run. It will add minimal modifications to your code in order to ensure this. More details about this in the [examples](examples/)
-- append the doctest include path to your library
-- create an executable test target (MyLibraryTest) for your library
-- register it as a cmake test (so that `ctest` or `make test`) will launch it.
+1. ensure that all tests are actually run. It will add minimal modifications to your code in order to ensure this. More details about this in the [examples](examples/)
+2. append the catch include path to your library
+3. create an executable test target (MyLibraryTest) for your library
+4. register it as a cmake test (so that `ctest` or `make test`) will launch it.
 
 
 
@@ -63,10 +63,12 @@ YourProject/
 
 #### Step 2 : Adjust the paths in `catch_registerstaticlibrary.cmake`
 
-If needed, adjust the paths in the first two lines of `catch_registerstaticlibrary.cmake`
+If needed, adjust the paths in the first lines of `catch_registerstaticlibrary.cmake`
 
 ```
+# Adjust this path if needed : this is where your catch.hpp file resides 
 set (catch_lib_location ${CMAKE_SOURCE_DIR}/catch)
+# Adjust this path if needed : this is where a checkout of catch_registerstaticlibrary resides
 set (catch_registerstaticlibrary_location ${CMAKE_SOURCE_DIR}/catch_registerstaticlibrary)
 ```
 
@@ -81,8 +83,8 @@ enable_testing()
 #### Step 4 : Register tests for your library
 
 in the `CMakeLists.txt` of your library
-* Include "catch_registerstaticlibrary.cmake"
-* Call `catch_registerstaticlibrary(YourLibrary YourLibraryTest)` (where YourLibrary is the name of your library and YourLibraryTest is the name of the test executable that will be created)
+1. Include "catch_registerstaticlibrary.cmake"
+2. Call `catch_registerstaticlibrary(YourLibrary YourLibraryTest)` (where YourLibrary is the name of your library and YourLibraryTest is the name of the test executable that will be created)
 
 Example :
 ```
@@ -99,8 +101,8 @@ catch_registerstaticlibrary(YourLibrary YourLibraryTest)
 
 ##### catch_registercppfiles
 `catch_registercppfiles(YourLibrary)` will make some small changes to your cpp files in order to ensure that tests are actually run : it will modify your cpp files by adding a dummy function `catchRegister_[GUID]()`.
-  This modification is done only once, and can be committed. Your cpp files will not be modified unless they actually use catch (i.e they include `catch.hpp` or they include a `TEST_CASE`)
-
+  This modification is done only once, and can be committed. Your cpp files will not be modified unless they actually use catch (i.e they include `catch.hpp` or they include a `TEST_CASE` or a `SCENARIO`)
+`
 
 ##### catch_create_registermainfile
 `catch_create_registermainfile(YourLibrary)` will create a file `catch_registerstaticlibrary.cpp` that will call these dummy functions : this is the secret in order to make the self-registration of tests work with a static library.
