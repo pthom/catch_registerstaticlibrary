@@ -1,6 +1,5 @@
 # example_fail
-This is an example utf the classic case where static registration fails 
-when your tests are placed inside a static library.
+This is an example of the classic case where static registration fails when your tests are placed inside a static library.
 See https://github.com/philsquared/Catch/issues/421
 
 If you build this example (using `build.sh`), you will see the following output:
