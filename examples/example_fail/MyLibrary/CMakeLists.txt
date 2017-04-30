@@ -1,4 +1,4 @@
-include_directories("../catch/")
+include_directories("../../catch/")
 set(sources lib1.cpp lib2.cpp)
 
 add_library(MyLibrary STATIC lib1.cpp lib2.cpp)
