@@ -21,6 +21,7 @@ This project provides a solution, based on the further assumption that :
 This project was tested under OSX, Windows and Linux
 
 #### Requirements
+* catch
 * cmake
 * python
 
