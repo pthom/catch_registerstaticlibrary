@@ -2,7 +2,7 @@
 This is an example of the classic case where static registration fails when your tests are placed inside a static library.
 See https://github.com/philsquared/Catch/issues/421
 
-Build it and run the tests using `build.sh`
+Build it and run the tests using `build.sh` or `build.bat`
 
 If you run the tests, you will see the following output :
 ```
@@ -14,11 +14,11 @@ Ouch...
 ### example_register
 `example_register/` is an example of a complete project with a library that will be tested.
 
-Build it by calling `build.sh`
+Build it by calling `build.sh` or `build.bat`
 This will create a folder named `build`. 
 You can run the tests from the build folder with either one of the commands below: 
 1. `ctest` 
-2. `make test` inside this f`lder
+2. `make test` inside this folder
 3. `./bin/MyLibraryTest`
 
 
