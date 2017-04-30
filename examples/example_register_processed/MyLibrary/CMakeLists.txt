@@ -1,4 +1,4 @@
-include("${CMAKE_SOURCE_DIR}/catch_registerstaticlibrary/src/catch_registerstaticlibrary.cmake")
+include("${CMAKE_SOURCE_DIR}/../../src/catch_registerstaticlibrary.cmake")
 
 set(sources lib1.cpp lib2.cpp)
 add_library(MyLibrary STATIC lib1.cpp lib2.cpp)
