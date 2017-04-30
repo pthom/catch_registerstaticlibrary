@@ -54,7 +54,7 @@ function (catch_register_ctest testTargetName)
 endfunction()
 
 
-function (catch_register_static_library libraryName testTargetName)
+function (catch_registerstaticlibrary libraryName testTargetName)
   # message("catch_register_static_library " ${libraryName})
   catch_addincludepath(${libraryName})
   catch_registercppfiles(${libraryName})
