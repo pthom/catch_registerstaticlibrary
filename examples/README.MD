@@ -30,6 +30,6 @@ You can see the auto-generated functions `catchRegister_[GUID]()` as well as the
 
 ### detailed differences
 
-See the commit https://github.com/pthom/catch_registerstaticlibrary/commit/974cb65ba8a3c81d48089e9cf27276dc6f4ae41a
+See the commit https://github.com/pthom/catch_registerstaticlibrary/commit/7e0ba6bc5d5fe1d178f57317716e915278c34562
 which shows the complete diff upon the first build (the modification are applied only once).
 
