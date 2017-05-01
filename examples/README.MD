@@ -25,7 +25,7 @@ You can run the tests from the build folder with either one of the commands belo
 ### `example_register_processed`
 `example_register_processed/` is a copy of `example_register/`, in which the cpp source code was modified after cmake was executed.
 
-You can see the auto-generated functions `catchRegister_[GUID]()` as well as the auto-generated `catch_registerstaticlibrary.cpp` file.
+You can see the auto-generated functions `catchRegister_[GUID]()` as well as the auto-generated `rsl_registerstaticlibrary.cpp` file.
 
 
 ### detailed differences

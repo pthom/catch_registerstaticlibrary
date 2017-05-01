@@ -68,12 +68,12 @@ YourProject/
         └── catch_registerstaticlibrary.py
 ```
 
-#### Step 2 : Set catch_lib_location in you main CMakeLists.txt file
+#### Step 2 : Set rsl_test_lib_location in you main CMakeLists.txt file
 
 Inside your main `CMakeLists.txt`, set the path to your copy of catch.hpp.
 For example:
 ```
-set (catch_lib_location ${CMAKE_SOURCE_DIR}/catch)
+set (rsl_test_lib_location ${CMAKE_SOURCE_DIR}/catch)
 ```
 
 #### Step 3 : enable tests for your project
@@ -107,8 +107,8 @@ catch_registerstaticlibrary(YourLibrary YourLibraryTest)
   This modification is done only once, and can be committed. Your cpp files will not be modified unless they actually use catch (i.e they include `catch.hpp` or they include a `TEST_CASE` or a `SCENARIO`)
 `
 
-##### rsl__registermainfile
-`rsl__registermainfile(YourLibrary)` will create a file `catch_registerstaticlibrary.cpp` that will call these dummy functions : this is the secret in order to make the self-registration of tests work with a static library.
+##### rsl_registermainfile
+`rsl_registermainfile(YourLibrary)` will create a file `rsl_registerstaticlibrary.cpp` that will call these dummy functions : this is the secret in order to make the self-registration of tests work with a static library.
 This file can also be committed and will only be modified when new source files are added to the library.
 
 ##### More details
@@ -117,14 +117,14 @@ See [the examples](examples/) for more details.
 
 ### Utilities
 
-##### catch_appendregisterlibrarycpp_tosources
-`catch_appendregisterlibrarycpp_tosources(YourLibrary)` can be used in conjunction with `rsl_registercppfiles()`. It will add the `catch_registerstaticlibrary.cpp` file to your library sources files.
+##### rsl_appendregistermainfiletosources
+`rsl_appendregistermainfiletosources(YourLibrary)` can be used in conjunction with `rsl_registercppfiles()`. It will add the `rsl_registerstaticlibrary.cpp` file to your library sources files.
 
-##### catch_addincludepath
-`catch_addincludepath(YourLibrary)` will simply add the catch include path to your library.
+##### rsl_addincludepath
+`rsl_addincludepath(YourLibrary)` will simply add the catch include path to your library.
 
-##### catch_maketesttarget
-`catch_maketesttarget(YourLibrary YourLibraryTest)` will create an executable target for your tests
+##### rsl_maketesttarget
+`rsl_maketesttarget(YourLibrary YourLibraryTest)` will create an executable target for your tests
 
-##### catch_register_ctest
-`catch_register_ctest(YourLibraryTest)` will register this exe as a test (so that `make test` or `ctest` will launch it)
+##### rsl_registercmaketest
+`rsl_registercmaketest(YourLibraryTest)` will register this exe as a test (so that `make test` or `ctest` will launch it)
