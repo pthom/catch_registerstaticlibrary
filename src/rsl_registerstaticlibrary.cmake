@@ -20,7 +20,7 @@ function (rsl_registercppfiles libraryName)
   # rsl_registercppfiles is a dependency of the library, so that
   # it will be called during the build
   message("add_custom_target(registercppfiles_${libraryName} COMMAND python ${rsl_location}/rsl_registerstaticlibrary.py -registercppfiles ${rsl_testfile_code_hints} ${sources} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})")
-  add_custom_target(registercppfiles_${libraryName} COMMAND python ${rsl_location}/rsl_registerstaticlibrary.py -registercppfiles ${rsl_testfile_code_hints} ${sources} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  add_custom_target(registercppfiles_${libraryName} COMMAND python ${rsl_location}/rsl_registerstaticlibrary.py -registercppfiles ${rsl_test_library_id} ${sources} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
   add_dependencies(${libraryName} registercppfiles_${libraryName})
   set_target_properties(registercppfiles_${libraryName} PROPERTIES FOLDER rsl_autoregister)
 endfunction()
