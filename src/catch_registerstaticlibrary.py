@@ -139,7 +139,7 @@ def show_help():
     """Show help"""
     help_message = """
         Usage :
-            _command_ -rsl_registercppfiles file1.cpp file2.cpp ...
+            _command_ -registercppfiles file1.cpp file2.cpp ...
                 Will add a RslRegister_GUID() to cpp files
             _command_ -registermainfile file1.cpp file2.cpp file3.cpp ...
                 Will create a the main register file with one function that calls all RslRegister_GUID() functions
@@ -152,7 +152,7 @@ def main():
     if len(sys.argv) < 2:
         show_help()
         exit(1)
-    if sys.argv[1] == "-rsl_registercppfiles":
+    if sys.argv[1] == "-registercppfiles":
         files = sys.argv[2:]
         register_cpp_files(files)
     elif sys.argv[1] == "-registermainfile":
