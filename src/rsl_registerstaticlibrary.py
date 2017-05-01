@@ -146,7 +146,7 @@ def show_help():
     """Show help"""
     help_message = """
         Usage :
-            _command_ -registercppfiles json_testfile_code_hints file1.cpp file2.cpp ...
+            _command_ -registercppfiles test_library_id file1.cpp file2.cpp ...
                 Will add a RslRegister_GUID() to cpp files
             _command_ -registermainfile file1.cpp file2.cpp file3.cpp ...
                 Will create a the main register file with one function that calls all RslRegister_GUID() functions
@@ -161,7 +161,6 @@ def main():
         exit(1)
     if sys.argv[1] == "-registercppfiles":
         test_library_id = sys.argv[2]
-        print("test_library_id=-->" + test_library_id + "<--")
         files = sys.argv[3:]
         register_cpp_files(files, test_library_id)
     elif sys.argv[1] == "-registermainfile":
