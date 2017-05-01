@@ -1,6 +1,12 @@
 # rsl : Register Static Library code
+
 if(NOT DEFINED rsl_test_lib_location)
-  message(FATAL_ERROR "rsl_test_lib_location is undefined)")
+  message("")
+  message("Please define rsl_test_lib_location with the location of the folder containing your test lib (for example the folder containing catch.hpp)")
+  message("For example:")
+  message("set (rsl_test_lib_location ${CMAKE_SOURCE_DIR}/catch)")
+  message("")
+  message(FATAL_ERROR "Please define rsl_test_lib_location)")
 endif()
 
 set (rsl_location ${CMAKE_CURRENT_LIST_DIR})
