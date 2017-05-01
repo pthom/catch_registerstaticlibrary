@@ -65,7 +65,7 @@ YourProject/
     └── src/
         ├── catch_main.cpp
         ├── catch_registerstaticlibrary.cmake
-        └── catch_registerstaticlibrary.py
+        └── rsl_registerstaticlibrary.py
 ```
 
 #### Step 2 : Set rsl_test_lib_location in you main CMakeLists.txt file

@@ -7,6 +7,7 @@ import sys
 import uuid
 import os.path
 import re
+import json
 
 REGISTERCPPFILE_CODE = """
 // This code was added by rsl_registerstaticlibrary.cmake in order to ensure that the tests are properly run.
@@ -38,16 +39,13 @@ def findwholeword_regex(word):
     """creates a regex that matches a word"""
     return re.compile(r'\b({0})\b'.format(word)).search
 
-# words that indicate that a file actually implements tests (using catch for example)
-CPP_TESTFILE_HINTS = ["catch.hpp", "TEST_CASE", "SCENARIO"]
-
-def does_sourcefile_implement_tests(lines):
+def does_sourcefile_implement_tests(lines, testfile_code_hints):
     """Checks if a cpp file seems to implement tests"""
     test_usage_found = False
     for line in lines:
         line = line[:-1]
         # print("testing line ==>" + line + "<==")
-        for test_usage_hint in CPP_TESTFILE_HINTS:
+        for test_usage_hint in testfile_code_hints:
             my_regex = findwholeword_regex(test_usage_hint)
             if my_regex(line):
                 test_usage_found = True
@@ -57,7 +55,7 @@ def does_sourcefile_implement_tests(lines):
     # print("test_usage_found=" + str(test_usage_found))
     return test_usage_found
 
-def register_one_cpp_file(filename):
+def register_one_cpp_file(filename, testfile_code_hints):
     """Modifies a cpp file by adding REGISTERCPPFILE_CODE (if needed)"""
     # print("register_one_cpp_file " + filename)
     if filename == REGISTERMAINFILE_NAME:
@@ -70,7 +68,7 @@ def register_one_cpp_file(filename):
     with open(filename, 'r') as f:
         lines = f.readlines()
 
-    if not does_sourcefile_implement_tests(lines):
+    if not does_sourcefile_implement_tests(lines, testfile_code_hints):
         return
 
     already_registered = False
@@ -86,10 +84,10 @@ def register_one_cpp_file(filename):
             print(filename + " was modified (added RslRegister_ function()")
 
 
-def register_cpp_files(source_files):
+def register_cpp_files(source_files, testfile_code_hints):
     """Registers all source files"""
     for filename in source_files:
-        register_one_cpp_file(filename)
+        register_one_cpp_file(filename, testfile_code_hints)
 
 def find_cpp_file_register_guid(cpp_filename):
     """Finds the registration guid in a cpp file"""
@@ -153,8 +151,12 @@ def main():
         show_help()
         exit(1)
     if sys.argv[1] == "-registercppfiles":
-        files = sys.argv[2:]
-        register_cpp_files(files)
+        json_testfile_code_hints = sys.argv[2]
+        # print("json_testfile_code_hints=-->" + json_testfile_code_hints + "<--")
+        testfile_code_hints = json.loads(json_testfile_code_hints)
+        # print("testfile_code_hints=-->" + str(testfile_code_hints) + "<--")
+        files = sys.argv[3:]
+        register_cpp_files(files, testfile_code_hints)
     elif sys.argv[1] == "-registermainfile":
         files = sys.argv[2:]
         register_main_file(files)
