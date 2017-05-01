@@ -13,16 +13,16 @@ if (MSVC)
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 endif()
 
-function (registercppfiles libraryName)
+function (rsl_registercppfiles libraryName)
   get_target_property(sources ${libraryName} SOURCES)
-  # registercppfiles is a dependency of the library, so that
+  # rsl_registercppfiles is a dependency of the library, so that
   # it will be called during the build
-  add_custom_target(registercppfiles_${libraryName} COMMAND python ${catch_registerstaticlibrary_location}/catch_registerstaticlibrary.py -registercppfiles ${sources} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  add_custom_target(registercppfiles_${libraryName} COMMAND python ${catch_registerstaticlibrary_location}/catch_registerstaticlibrary.py -rsl_registercppfiles ${sources} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
   add_dependencies(${libraryName} registercppfiles_${libraryName})
   set_target_properties(registercppfiles_${libraryName} PROPERTIES FOLDER catch_autoregister)
 endfunction()
 
-function (catch_create_registermainfile libraryName)
+function (rsl_registermainfile libraryName)
   get_target_property(sources ${libraryName} SOURCES)
 
   # execute_process is executed during cmake : this is important, otherwise
@@ -41,12 +41,12 @@ function (catch_create_registermainfile libraryName)
 endfunction()
 
 
-function (catch_addincludepath libraryName)
+function (rsl_addincludepath libraryName)
   target_include_directories(${libraryName} PUBLIC ${catch_lib_location} )
 endfunction()
 
 
-function (catch_appendregisterlibrarycpp_tosources libraryName)
+function (rsl_appendregistermainfiletosources libraryName)
   get_target_property(sources ${libraryName} SOURCES)
 
   # append catch_registerstaticlibrary.cpp to the library sources if needed
@@ -56,7 +56,7 @@ function (catch_appendregisterlibrarycpp_tosources libraryName)
   endif()
 endfunction()
 
-function (catch_maketesttarget libraryName testTargetName)
+function (rsl_maketesttarget libraryName testTargetName)
   add_executable(${testTargetName} ${catch_registerstaticlibrary_location}/catch_main.cpp)
   target_link_libraries(${testTargetName} ${libraryName})
 
@@ -70,18 +70,18 @@ function (catch_maketesttarget libraryName testTargetName)
   endif()
 endfunction()
 
-function (catch_register_ctest testTargetName)
+function (rsl_registercmaketest testTargetName)
   add_test(NAME ${testTargetName} COMMAND ${testTargetName})
 endfunction()
 
 
 function (catch_registerstaticlibrary libraryName testTargetName)
   # message("catch_register_static_library " ${libraryName})
-  catch_addincludepath(${libraryName})
-  registercppfiles(${libraryName})
-  catch_create_registermainfile(${libraryName})
-  catch_appendregisterlibrarycpp_tosources(${libraryName})
+  rsl_addincludepath(${libraryName})
+  rsl_registercppfiles(${libraryName})
+  rsl_registermainfile(${libraryName})
+  rsl_appendregistermainfiletosources(${libraryName})
 
-  catch_maketesttarget(${libraryName} ${testTargetName})
-  catch_register_ctest(${testTargetName})
+  rsl_maketesttarget(${libraryName} ${testTargetName})
+  rsl_registercmaketest(${testTargetName})
 endfunction()

@@ -102,13 +102,13 @@ catch_registerstaticlibrary(YourLibrary YourLibraryTest)
 
 ### auto-generated code
 
-##### catch_registercppfiles
-`catch_registercppfiles(YourLibrary)` will make some small changes to your cpp files in order to ensure that tests are actually run : it will modify your cpp files by adding a dummy function `catchRegister_[GUID]()`.
+##### rsl_registercppfiles
+`rsl_registercppfiles(YourLibrary)` will make some small changes to your cpp files in order to ensure that tests are actually run : it will modify your cpp files by adding a dummy function `catchRegister_[GUID]()`.
   This modification is done only once, and can be committed. Your cpp files will not be modified unless they actually use catch (i.e they include `catch.hpp` or they include a `TEST_CASE` or a `SCENARIO`)
 `
 
-##### catch_create_registermainfile
-`catch_create_registermainfile(YourLibrary)` will create a file `catch_registerstaticlibrary.cpp` that will call these dummy functions : this is the secret in order to make the self-registration of tests work with a static library.
+##### rsl__registermainfile
+`rsl__registermainfile(YourLibrary)` will create a file `catch_registerstaticlibrary.cpp` that will call these dummy functions : this is the secret in order to make the self-registration of tests work with a static library.
 This file can also be committed and will only be modified when new source files are added to the library.
 
 ##### More details
@@ -118,7 +118,7 @@ See [the examples](examples/) for more details.
 ### Utilities
 
 ##### catch_appendregisterlibrarycpp_tosources
-`catch_appendregisterlibrarycpp_tosources(YourLibrary)` can be used in conjunction with `catch_registercppfiles()`. It will add the `catch_registerstaticlibrary.cpp` file to your library sources files.
+`catch_appendregisterlibrarycpp_tosources(YourLibrary)` can be used in conjunction with `rsl_registercppfiles()`. It will add the `catch_registerstaticlibrary.cpp` file to your library sources files.
 
 ##### catch_addincludepath
 `catch_addincludepath(YourLibrary)` will simply add the catch include path to your library.
