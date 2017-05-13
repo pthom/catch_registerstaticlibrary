@@ -1,3 +1,5 @@
+Note : there is a better alternative here: https://github.com/pthom/cmake_registertest
+
 # Static library testing made easy with catch and cmake
 
 #### Motivation
